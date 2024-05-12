@@ -1,0 +1,65 @@
+overview
+requirement gathering
+class diagram
+schema design
+code
+
+
+
+REQUIREMENT GATHERING:
+    User can register on the application also can update there profiles
+    User details
+        user name
+        email
+        phone number
+        list of groups
+
+    User can add friends.
+    User can create groups
+    Group details
+        name
+        list of expenses
+        list of users
+
+    User can add or remove friends from group.
+    User can add expense.
+    Expense details:
+        description
+        currency
+        amount
+        date of expenses
+        who is paying/who all are paying and how much they are paying
+        who all are supposed to pay
+
+    Split strategy
+        equal or by specific amount
+
+    User can settle up expenses and while settling up we should show the minimum no of
+    transaction required to settle up.
+
+
+---------------------------------------------------------------------------------------------------------
+
+Given a number of transaction in a group of people find the minimum no of transaction
+required to settle the expenses.(NP Hard Problem)
+
+Basic Approach:-
+
+transaction1        A-1000 B-1000
+                    A-500 B-500 C-500 D-500
+
+transaction2        A-1000
+                    A-500 B-500
+
+transaction3        A-500 B-800
+                    A-200 B-100 C-500 D-500
+
+A 2500   -   1200 =  1300    0           2600
+B 1800   -   1100 =  700     -600    0
+C 0      -   1000 =  -1000   -1600   0
+D 0      -   1000 =  -1000   -2600   0
+
+Optimised Approach:-
+
+A = 1300 300 0   C = -1000 0
+B = 700 0    D = -1000 -300 0
