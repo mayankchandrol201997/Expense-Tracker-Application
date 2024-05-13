@@ -2,15 +2,16 @@ package com.dev.Splitwise.Splitwise.service.Strategy.SettleUpStrategy;
 
 import com.dev.Splitwise.Splitwise.entity.*;
 import com.dev.Splitwise.Splitwise.helper.UserOutstanding;
-import com.dev.Splitwise.Splitwise.helper.UserOutstandingAmountComparator;
+import com.dev.Splitwise.Splitwise.helper.UserOutstandingAmountMaxComparator;
+import com.dev.Splitwise.Splitwise.helper.UserOutstandingAmountMinComparator;
 
 import java.util.*;
 
 public class MinimumTransactionSettlementStrategy implements SettleUpStrategy{
     @Override
     public List<SettleTransaction> settleUp(List<Expense> expenses) {
-        Queue<UserOutstanding> lenderMax = new PriorityQueue<>(new UserOutstandingAmountComparator());
-        Queue<UserOutstanding> borrowerMin = new PriorityQueue<>();
+        Queue<UserOutstanding> lenderMax = new PriorityQueue<>(new UserOutstandingAmountMaxComparator());
+        Queue<UserOutstanding> borrowerMin = new PriorityQueue<>(new UserOutstandingAmountMinComparator());
 
         HashMap<User, Double> userExpenseMap = getUserExpenseMap(expenses);
         for(Map.Entry<User, Double> entry:userExpenseMap.entrySet())
@@ -61,6 +62,7 @@ public class MinimumTransactionSettlementStrategy implements SettleUpStrategy{
 
     private HashMap<User, Double> getUserExpenseMap(List<Expense> expenses) {
         HashMap<User,Double> userExpenseMap = new HashMap<>();
+
         for(Expense expense : expenses)
         {
             for (UserExpense userExpense:expense.getUserExpenses())

@@ -21,7 +21,7 @@ public class GroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GroupInfoResponseDto> getGroupInfo(@PathVariable("id") int id)
+    public ResponseEntity<GroupInfoResponseDto> getGroupInfoById(@PathVariable("id") int id)
     {
         return ResponseEntity.ok(groupService.getGroupInfoById(id));
     }
